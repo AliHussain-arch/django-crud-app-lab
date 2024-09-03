@@ -13,5 +13,9 @@
     <h2>{{ car.year }} model</h2>
     <p>{{ car.description }}</p>
   </div>
+  <div class="car-actions">
+    <a href="{% url 'car-update' car.id %}" class="btn warn">Edit Car</a>
+    <a href="{% url 'car-delete' car.id %}" class="btn danger">Delete Car</a>
+  </div>
 </section>
 {% endblock %}
