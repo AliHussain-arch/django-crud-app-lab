@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cars/car-detail.css' %}" />
+{% endblock %}
+{% block content %}
+<section class="car-container">
+  <div class="car-img">
+    <img src="{% static 'images/car-icon.png' %}" alt="Car icon" />
+  </div>
+  <div class="car-details">
+    <h1>{{ car.make }} {{ car.model }}</h1>
+    <h2>{{ car.year }} model</h2>
+    <p>{{ car.description }}</p>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  section {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  div {
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    color: #444;
+  }
+  
+  p {
+    color: #666;
+  }
+  
+  small {
+    color: #999;
+  }
+
+  img.car-icon {
+    max-width: 100px; 
+    height: auto;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 8px; 
+  }
+  

@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cars/car-index.css' %}"/>
+{% endblock %} 
+
+{% block content %}
+<section class="icons-section">
+    <h1>Car List</h1>
+    <img src="{% static 'images/sedan.png' %}" alt="A sedan car" class="car-icon" />
+    <img src="{% static 'images/suv.png' %}" alt="An SUV" class="car-icon" />
+    <img src="{% static 'images/truck.png' %}" alt="A truck" class="car-icon" />
+    <img src="{% static 'images/sport.png' %}" alt="A sports car" class="car-icon" />
+</section>
+
+<section class="cars-list">
+  {% for car in cars %}
+    <div class="car-card">
+      <a href="{% url 'car-detail' car.id %}">
+        <div class="car-card-content">
+          <div class="car-card-img">
+            <img src="{% static 'images/car-icon.png' %}" alt="Car icon" class="car-icon" />
+          </div>
+          <h2>{{ car.make }} {{ car.model }}</h2>
+          <p>{{ car.year }} model</p>
+          <p><small>{{ car.description }}</small></p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}
+
