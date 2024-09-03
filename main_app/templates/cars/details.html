@@ -17,5 +17,47 @@
     <a href="{% url 'car-update' car.id %}" class="btn warn">Edit Car</a>
     <a href="{% url 'car-delete' car.id %}" class="btn danger">Delete Car</a>
   </div>
+  <h3>Add a Cleaning record</h3>
+  <form method="post" class="subsection-content" autocomplete="off"  action="{% url 'add-cleaning' car.id %}">
+    {% csrf_token %} 
+    {{ cleaning_form.as_p }}
+    <button type="submit" class="btn submit">Add Cleaning</button>
+  </form>
+  <div class="cleanings-car-container">
+    <section class="cleanings">
+      <div class="subsection-title">
+        <h2>Cleanings</h2>
+        <img
+          src="{% static 'images/morning.png' %}"
+          alt="Morning"
+        />
+        <img src="{% static 'images/afternoon.png' %}" alt="Afternoon" />
+        <img
+          src="{% static 'images/evening.png' %}"
+          alt="Evening"
+        />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Date</th>
+            <th>Cleaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cleaning in car.cleaning_set.all %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{cleaning.date}}</td>
+              <td>{{cleaning.get_time_display}}</td>
+              <td><a href="{% url 'update-cleaning' car.id cleaning.id %}">Edit</a></td>
+              <td><a href="{% url 'delete-cleaning' car.id cleaning.id %}">Delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </div>
 </section>
 {% endblock %}

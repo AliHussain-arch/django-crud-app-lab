@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Car
+from .models import Car, Cleaning
+from .forms import CleaningForm
+
 
 def home(request):
     return HttpResponse('<h1>Hello You are on the landing page!</h1>')
@@ -33,3 +35,29 @@ class CarUpdate(UpdateView):
 class CarDelete(DeleteView):
     model = Car
     success_url = '/cars/'
+
+def car_detail(request, car_id):
+    car = Car.objects.get(id=car_id)
+    cleaning_form = CleaningForm()
+    return render(request, 'cars/details.html', {
+        'car': car, 'cleaning_form': cleaning_form
+    })
+
+def add_cleaning(request, car_id):
+    form = CleaningForm(request.POST)
+    if form.is_valid():
+        new_cleaning = form.save(commit=False)
+        new_cleaning.car_id = car_id
+        new_cleaning.save()
+    return redirect('car-detail', car_id=car_id)
+
+class CleaningUpdate(UpdateView):
+    model = Cleaning
+    fields = ['date', 'time']
+    template_name = 'cleanings/update.html'
+
+class CleaningDelete(DeleteView):
+    model = Cleaning
+    template_name = 'cleanings/delete_confirm.html'
+
+    

@@ -12,5 +12,22 @@ class Car(models.Model):
 
     def get_absolute_url(self):
         return reverse('car-detail', kwargs={'car_id': self.id})
-    
+
+TIME = (
+    ('M', 'Morning'),
+    ('A', 'Afternoon'),
+    ('E', 'Evening')
+)
+
+class Cleaning(models.Model):
+    date = models.DateField()
+    time = models.CharField(max_length=1, choices=TIME, default=TIME[0][0] )
+
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.get_time_display()} on {self.date}"
+
+    class Meta:
+        ordering = ['-date'] 
 
