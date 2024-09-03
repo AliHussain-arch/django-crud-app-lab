@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Car, Cleaning
 from .forms import CleaningForm
+from django.urls import reverse
 
 
 def home(request):
@@ -56,8 +57,24 @@ class CleaningUpdate(UpdateView):
     fields = ['date', 'time']
     template_name = 'cleanings/update.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['car_id'] = self.object.car.id
+        return context
+
+    def get_success_url(self):
+        return reverse('car-detail', args=[self.object.car.id])
+
 class CleaningDelete(DeleteView):
     model = Cleaning
     template_name = 'cleanings/delete_confirm.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['car_id'] = self.object.car.id
+        return context
+
+    def get_success_url(self):
+        return reverse('car-detail', args=[self.object.car.id])
 
     

@@ -51,8 +51,8 @@
               <td>{{forloop.counter}}</td>
               <td>{{cleaning.date}}</td>
               <td>{{cleaning.get_time_display}}</td>
-              <td><a href="{% url 'update-cleaning' car.id cleaning.id %}">Edit</a></td>
-              <td><a href="{% url 'delete-cleaning' car.id cleaning.id %}">Delete</a></td>
+              <td><a href="{% url 'update-cleaning' car.id cleaning.id %}" class="btn warn">Edit Cleaning</a></td>
+              <td><a href="{% url 'delete-cleaning' car.id cleaning.id %}" class="btn danger">Delete Cleaning</a></td>
             </tr>
           {% endfor %}
         </tbody>

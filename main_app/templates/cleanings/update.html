@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cars/car-detail.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <h2>Update Cleaning Record</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn submit">Save changes</button>
+    <a href="{% url 'car-detail' car_id %}" class="btn">Cancel</a>
+  </form>
+{% endblock %}
